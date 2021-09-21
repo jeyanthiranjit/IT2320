@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title>Fibonacci Sequence</title> 
+  <body>
+  
+    <h2>Jeyanthi Meenakshisundaram - IT 2320 - Lab 2</h2>
+
+   <script>
+  
+   	   "use strict"
+	   numFib = 0;
+ while(numFib< 3) {
+  
+          alert("The sequence must have 3 or more numbers.");
+   
+       var myFib = [];  // declare the array
+		  myFib[0] = 0;
+		  myFib[1] = 1;
+		  var ratio1 = 1;
+
+       var numFib = prompt("How many numbers in the sequence?"); 
+	   numFib = parseFloat(numFib);
+    }
+	   for (let i = 2; i < numFib; i++) {
+		     
+			myFib[i] = myFib[i - 2] + myFib[i - 1];
+  
+		  }
+		  document.writeln("<B>The Febanocci series:  </B>");
+		  for (let j = 0; j < numFib; j++) {
+		       document.writeln(  myFib[j] );
+  ratio1 = myFib[j]/myFib[j-1];
+		  }
+		 
+	   
+	   document.writeln("<br> <br>");
+	   document.writeln("<B>Ratio: </B>" + ratio1);
+	</script>
+<p>gee, why did this come out at the bottom?
+   </p>
+</body> 
+</head> 
+</html>
