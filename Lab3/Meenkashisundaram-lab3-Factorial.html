@@ -1,0 +1,60 @@
+<html>
+<head>
+	<title>Lab 3 - functions</title> 
+	<h2>Jeyanthi Meenakshisundaram - IT 2320 - Lab 3</h2>
+	<script>
+		"use strict";
+		
+		function calcFactorial(myNum) { 
+			// calculate the factorial and return that value
+			var ans=1;
+			if(myNum != 0 || myNum != 1)
+			{
+				for(let i=myNum; i >= 1; i--)
+				{ 
+					ans = ans * (i);
+				}
+			}
+			return ans;
+		}
+		function calculate() { 
+			// get the number entered into the text box myNum
+			var mynumber = document.getElementById("myNum").value;
+			var integ = parseInt(mynumber,10);
+			
+			console.log("input is: " + integ);
+			// call the factorial function
+			var fact = calcFactorial(integ);
+			console.log("factorial is: " + fact);
+            // calculate the square of the number
+			var sq = integ * integ;
+			console.log("square is: " + sq);
+            // display those values in the proper place in the HTML 
+			document.getElementById("myFactorial").value = fact;
+			document.getElementById("mySquare").value = sq;
+		}
+		window.onload = function() {
+		    document.getElementById("goCalculate").onclick = calculate; 
+			document.getElementById("myNum").focus();
+		}; 
+	</script>
+</head> 
+<body>
+	<main>
+		<h2>Enter a Number for Calculation</h1> 
+		<label for="myNum">My Number Is:</label>
+		<input type="text" id="myNum"><br>
+		<br/>
+		<!-- display the squre here -->
+		<label for="mySquare">My Number Squared:</label> 
+		<input type="text" id="mySquare" disabled><br> 
+		<br/>
+		<!-- display the factorial here -->
+		<label for="">My Factorial</label> 
+		<input type="text" id="myFactorial" disabled><br> 
+		<br/>
+		<label>&nbsp;</label>
+		<input type="button" id="goCalculate" value="GO" ><br> 
+	</main> 
+</body>  
+</html>
