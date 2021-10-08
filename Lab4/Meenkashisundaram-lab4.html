@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+<style>
+    .blacktext { color: black; }
+	.redtext { color: red; }
+	
+	input[type=text] {
+				width:20%;
+				height:35px;
+				padding:5px;
+				margin-bottom:20px;
+				margin-top:5px;
+				border:2px solid #ccc;
+				color:#4f4f4f;
+				font-size:16px;
+				border-radius:5px
+		}
+		input[type=radio] {
+			margin:5px 5px 0
+		}
+</style>
+	<title>Lab 4 - form validations</title> 
+	
+	<h2>Jeyanthi Meenakshisundaram - IT 2320 - Lab 4 - Forms Processing</h2>
+	<script>
+		"use strict";
+		
+
+
+const form = document.getElementById('signup');
+
+window.onload = function() {
+
+	// set up event for maritalStatus drop down
+    document.getElementById('mstatus').onchange = mstatusChange;
+    //set up event for Submit button
+    document.getElementById ('submit').onclick = processForm;
+    //set focus to fname field
+	document.getElementById("fname").focus();
+}
+
+function mstatusChange() {
+    //get the value from mstatus drop down
+	var status = document.getElementById ('mstatus').value;
+  // disable or enable spouse name based on value
+   if (status == 'Married')
+        document.getElementById ('sname').disabled = false;
+   else
+        document.getElementById ('sname').disabled = true;
+}
+
+function processForm() {
+	//get all the form values
+   var lname = document.getElementById ('lname').value;
+   var fname = document.getElementById ('fname').value;
+   var email = document.getElementById("email").value;
+   var password = document.getElementById("password").value;
+var confirmPassword = document.getElementById("password2").value;
+var address = document.getElementById("address1").value;
+var address2 = document.getElementById("address2").value;
+var city = document.getElementById("city").value;
+var state = document.getElementById("state").value;
+var zip = document.getElementById("zipcode").value;
+var is_male = document.getElementById("male").checked;
+var is_female = document.getElementById("female").checked;
+var dob = document.getElementById("dob").value;
+var phone = document.getElementById("phone").value;
+var sname = document.getElementById("sname").value;
+
+if(is_male)
+  var gendr = male;
+ else
+   var gendr = female;
+
+  // repeat for each field on form
+   //Set a flag saying everything entered is correct
+   var formGood = true;
+ //  Check the fields on the form
+
+   if (lname == "") {
+       formGood = false;
+        document.getElementById ('lnameLabel').className = 'redtext';
+   } else {
+        document.getElementById ('lnameLabel').className = 'blacktext';
+   }
+   
+   if (fname == "") {
+       formGood = false;
+        document.getElementById ('fnameLabel').className = 'redtext';
+   } else {
+        document.getElementById ('fnameLabel').className = 'blacktext';
+   }
+    if (address == "") {
+       formGood = false;
+        document.getElementById ('address1Label').className = 'redtext';
+   } else {
+        document.getElementById ('address1Label').className = 'blacktext';
+   }
+   
+   if (address2 == "") {
+       formGood = false;
+        document.getElementById ('address2Label').className = 'redtext';
+   } else {
+        document.getElementById ('address2Label').className = 'blacktext';
+   }
+   
+   if (email == "") {
+       formGood = false;
+        document.getElementById ('emailLabel').className = 'redtext';
+   } else {
+        document.getElementById ('emailLabel').className = 'blacktext';
+   }
+   
+   if (password == "") {
+       formGood = false;
+        document.getElementById ('passwordLabel').className = 'redtext';
+   } else {
+        document.getElementById ('passwordLabel').className = 'blacktext';
+   }
+    if (password2 == "") {
+       formGood = false;
+        document.getElementById ('password2Label').className = 'redtext';
+   } else {
+        document.getElementById ('password2Label').className = 'blacktext';
+   }
+   
+   if (city == "") {
+       formGood = false;
+        document.getElementById ('cityLabel').className = 'redtext';
+   } else {
+        document.getElementById ('cityLabel').className = 'blacktext';
+   }
+    if (state == "") {
+       formGood = false;
+        document.getElementById ('stateLabel').className = 'redtext';
+   } else {
+        document.getElementById ('stateLabel').className = 'blacktext';
+   }
+      if (zip == "") {
+       formGood = false;
+        document.getElementById ('zipcodeLabel').className = 'redtext';
+   } else {
+        document.getElementById ('zipcodeLabel').className = 'blacktext';
+   }
+     if (phone == "") {
+       formGood = false;
+        document.getElementById ('phoneLabel').className = 'redtext';
+   } else {
+        document.getElementById ('phoneLabel').className = 'blacktext';
+   }
+         if (dob == "") {
+       formGood = false;
+        document.getElementById ('dobLabel').className = 'redtext';
+   } else {
+        document.getElementById ('dobLabel').className = 'blacktext';
+   }
+     if (sname == "") {
+       formGood = false;
+        document.getElementById ('snameLabel').className = 'redtext';
+   } else {
+        document.getElementById ('snameLabel').className = 'blacktext';
+   }
+   if(is_female != true && is_male != true){
+		formGood = false;
+        document.getElementById ('genderLabel').className = 'redtext';
+   } else {
+        document.getElementById ('genderLabel').className = 'blacktext';
+   }
+   //checking if passwords are same
+     if (password != password2) {
+       formGood = false;
+        document.getElementById ('passwordLabel').className = 'redtext';
+      // set the password2 label red also
+   } else {
+    //set the label classes to blacktext
+	 document.getElementById ('passwordLabel').className = 'blacktext';
+	}
+	
+	if (formGood) {
+        document.getElementById ("myForm").submit();
+	} else {
+        document.getElementById ("errorMsg").innerHTML = "Please fix the errors below";
+	}
+}
+/*
+				//from forms 
+		
+*/
+	</script>
+</head> 
+<body>
+   <h2><span id="errorMsg" class="redtext"></span></h2>
+  
+	<main>
+	<form id ="myForm" name ="signup" action="https://www.waynedog.net/formreader.php" class="form" method="post">
+	
+		<label id= "fnameLabel" class="blacktext">First Name </label>
+		<input type="text" id="fname" name="fname">
+      <label id= "lnameLabel" class="blacktext">  Last Name </label>
+	  <input type="text" id="lname" name="lname" ><br><br>
+	  <label id="address1Label" class="blacktext"> Address </label>
+	  <input type ="text" id="address1" name="address1" >
+	  <label id= "address2Label" class="blacktext">Suit or Apt </label>
+	  <input type="text" id="address2" name="address2"><br><br>
+      <label id = "cityLabel" class="blacktext">  City </label><input type="text" id="city" name="city" >
+	  <label id="stateLabel" class="blacktext"> State </label><input type ="select" id="state" name="state" ><br><br>
+	  <label id = "zipcodeLabel" class="blacktext">  Zipcode </label><input type="text" id="zipcode" name="zipcode"><br><br>
+	  <label id="genderLabel" class="blacktext"> Gender </label>
+	  <input id="male" name="gender" type="radio" value="Male">
+		<label>Male</label>
+		<input id="female" name="gender" type="radio" value="Female">
+		<label>Female</label><br><br>
+	  <label id="dobLabel" class="blacktext"> Birth Date </label>
+	  <input type ="date" id="dob" name="dob" ><br><br>
+	  <label id="mstatusLabel" class="blacktext"> Marital Status </label>
+	  <select id="mstatus" name="mstatus">
+			<option value="single">Single</option>
+			<option value="married">Married</option>
+ 
+	</select>
+	 
+	  
+	  <label id="snameLabel" class="blacktext"> Spouse name </label><input type ="text" id="sname" name="sname" ><br><br>
+	  <label id="emailLabel" class="blacktext"> Email </label><input type ="email" id="email" name="email" >
+	  <label id="phoneLabel" class="blacktext"> Phone </label><input type ="text" id="phone" name="phone" ><br><br>
+	  <label id="passwordLabel" class="blacktext"> password </label><input type ="password" id="password" name="password" >
+	  	  <label id="password2Label" class="blacktext"> Confirm password </label> <input type ="password" id="password2" name="password2"><br><br>
+		   <input type="reset" value="Reset">     
+		  	  <input type="button" id="submit" name="submit" value="Submit">
+	</form>
+	</main> 
+</body>  
+</html>
