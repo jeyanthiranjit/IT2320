@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Walking Guy Animation</title>
+ <meta charset="utf-8" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+</head>
+<style>
+  
+</style>
+
+<body>
+  <h1>Walking Guy</h1>
+  
+  <input type ="button" id="button1" value ="start">
+  <div class="container">
+    <div class="inner">
+       <img id="walkingman"  style="background:#98bf21;height:100px;width:200px;position:absolute;" src="guy-walking.gif" />
+	 </div>
+  </div>
+ <script>
+ var imageWidth = '20px';
+			var imageHeight = '20px';
+
+			// Get the dimentions of the window.
+			var windowWidth = $( window ).width();
+			var windowHeight = $( window ).height();
+
+			// Get the min and max positions.
+			var minLeft = 0;
+			var maxLeft = (windowWidth - imageWidth);
+			var minTop = 0;
+			var maxTop = (windowHeight - imageHeight);
+
+			// Let's set some caps on the max speed.
+			var maxSpeed = 5;
+
+
+			// Bind the window resize to update the dimensions.
+			$( window ).resize(
+				function(){
+					// Update the window size.
+					windowWidth = $( window ).width();
+					windowHeight = $( window ).height();
+
+					// Update max positional coordinates.
+					maxLeft = (windowWidth - imageWidth);
+					maxTop = (windowHeight - imageHeight);
+				}
+			);
+			function startMoving(img) {
+		var div = img;  
+		var imgWidth = div.width();
+		var screenWidth = $(window).width();
+		var amount = screenWidth - (parseInt(div.css("left"), 10) || 0);
+		if (amount <=0 ) {
+			div.css("left", -imgWidth);
+			amount = screenWidth + imgWidth;
+		}
+		var moveRate = 300;   // pixels per second to move
+		var time = amount * 1000 / moveRate;
+		div.stop(true)
+			.animate({left: "+=" + amount}, time, "linear", function() {
+            // when animation finishes, start over
+            startMoving(div);
+        })
+}
+	
+  $(document).ready(function () { 
+  $("#walkingman").hide();
+  
+    // run the currently selected effect
+				
+				$("#button1").click(function(){
+				
+				 var div = $("#walkingman");  
+				var imgWidth = div.width();
+				//var imgWidth = 400px;
+		var screenWidth = $(window).width();
+	//	var amount = screenWidth - (parseInt(div.css("left"), 10) || 0);
+	var amount = screenWidth - imgWidth;
+		if (amount <=0 ) {
+			div.css("left", -imgWidth);
+			amount = screenWidth + imgWidth;
+		}
+				 div.fadeIn(1000);
+				
+				div.animate({left: "+=" + amount},5000,"linear", 'slow');
+				//div.animate({bottom: '100px'},1000,'slow');
+				//div.animate({bottom: "300px"},'slow');
+				
+				div.animate({left: "-=" + amount},5000,"linear", 'slow');
+				
+			//	div.rotate({angle:180;});
+				//div.animate({right: "-=" + amount},5000,"linear",  'slow');
+				 div.fadeOut(1000);
+				//startMoving(div);
+			 //   div.animate({top: '5px'}, 'slow');
+			//    div.animate({left: '1000px'}, 'slow');
+			     
+					
+    });
+ 
+});
+     
+   
+</script>
+</body>
+</html>
