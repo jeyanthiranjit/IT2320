@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lab 9</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+  
+  <style>
+  body {
+ background-image: url("weather.png");
+ background-color: #cccccc;
+}
+div {
+
+  color: red;
+}
+  </style>
+<script>
+
+ $(document).ready(function () {  
+         $('#button1').click(function (e) {
+var zipCode = $('#zipCode').val();
+//alert(zipCode);
+var cityId;
+   var name;
+   var pressure;
+ var Humidity;
+ var condin;
+  var windspd;
+<!-- api.openweathermap.org/data/2.5/forecast?zip={zip code},{country code}&appid={API key} -->
+<!-- api.openweathermap.org/data/2.5/forecast?zip=94040,us&appid=00d9250f18e8871f44081405df83e053 -->
+var url = "http://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + ",us&appid=00d9250f18e8871f44081405df83e053&units=Imperial";
+
+$.ajax({
+     method: "GET",
+     url: url,
+     dataType: "json",
+     success: function (data) {
+			  
+				// alert(url);
+				// alert(data.list.length);
+			   cityId = (data.city.id);
+			//  alert(cityId);
+			   name = (data.city.name);
+			 //  alert(name);
+			   <!-- var temp = weatherResponse.list[0].main.temp; -->
+			   pressure = data.list[0].pressure; 
+			  Humidity =  data.list[0].main.humidity; 
+			  var tempmin = data.list[0].main.temp_min; 
+			   var tempNow = data.list[0].main.temp; 
+			  var tempmax = data.list[0].main.temp_max ; 
+			  var temp = tempmin + " F - " + tempmax +" F";
+			// alert(temp);
+			   condin =  data.list[0].weather[0].description;
+			 //  alert(condin);
+			   windspd = data.list[0].wind.speed;
+			   windDirectn = (data.list[0].wind.deg) + " degrees";
+			   $('#windSpeed').val(windspd);
+			   $('#windDrn').val(windDirectn);
+			    $('#condition').val(condin);
+			$('#cityName').val(name);
+           $('#minMax').val(temp);
+			$('#temp').val(tempNow);
+			$('#humidity').val(Humidity);
+	   	   }
+		});
+		  // here will be the code that takes the JSON returned in the structure weatherResponse and diplays it on the page.
+		  //res = CreateWeatherJson(weatherResponse);
+          // here is one example
+      //    $('#windSpeed').html(weatherResponse.list.wind.speed);
+		  //$('#condition').html(weatherResponse.weather.description);
+		 // alert(windspd);
+    	  // $("#windSpeed").html(windspd);
+	   
+	  
+	});
+	});
+
+	
+
+</script>
+</head>
+ 
+<body>
+ <h1> Jeyanthi Meenakshisundaram - IT 2320 - Weather API</h1>
+ 
+
+   <br />
+   
+  <div class="font">  Enter the Zip code of city to know its weather:
+   <input type ="text" id="zipCode" name="zipCode" value=""><br />
+   <div class="horizontalgap" style="width:10px">&nbsp;<input type ="button" id="button1" style="margin-left: 35em" value ="search"><br /></div>
+   
+  <b>1. Name of the city</b>
+	<input type ="text" id="cityName" name="cityName" value=""><br />
+    2. The current condition (Cloudy, Rain, Partly Cloudy etc.)
+	<input type ="text" id="condition" name="condition" value=""><br />
+    3. Temperature
+	<input type ="text" id="temp" name="Temp" value=""><br />
+    4. Wind Speed 
+	<input type ="text" id="windSpeed" name="windSpeed" value=""> and Direction <input type ="text" id="windDrn" name="windDrn" value=""><br /> 
+   5.  Humidity
+   <input type ="text" id="humidity" name="humidity" value=""><br />
+   6. Temp Min and Max
+   <input type ="text" id="minMax" name="minMax" value=""><br />
+</div>
+</body>
+</html> 
