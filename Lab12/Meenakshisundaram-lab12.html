@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lab12</title>
+<meta charset="utf-8" />
+  
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+  
+  <script>
+$(document).ready(function () {  
+		var arr =[];
+		$('#GCD').click(function (e)  { 
+        var bignum = 0;
+		var smallnum = 0;
+		//alert("button clicked");
+		   var Num1 = $('#num1').val();
+		      var Num2 = $('#num2').val();
+		   
+	var ans = gcd(Num1, Num2);
+		  
+		  
+		$("#results").html("The GCD of these two numbers is : " + ans);
+			
+        event.preventDefault();
+    }); 
+		  let gcd = (num1, num2) => {
+   //if num2 is 0 return num1;
+   if(num2 === 0){
+      return num1;
+   } 
+   
+      
+    //check if num1 > num2
+   
+		return gcd(num2, num1 % num2);
+	
+}
+		$('#prime').click(function (e)  { 
+        
+		//alert("button clicked");
+			var reslt = [];
+			reslt.push('<span>' + 1 + '</span><br />');
+			reslt.push('<span>' + 2 + '</span><br />');
+		   var number = $('#anynum').val();
+		  // alert(string1);
+		  if(number < 0) {
+		    number = -(number);
+		  }
+		//Loop from 3 to number entered increment by 2
+		for(let i =3; i<= number; i++) {
+		
+    var isPrime = true;
+   // Loop from 3 to square root of number entered 
+   for(let j=2; j < i; j++){
+        if (i % j == 0){
+            isPrime = false
+            break;
+			}
+        // end if
+}
+   // end inner loop
+    //if isPrime 
+	if( i > 1 && isPrime == true ) {
+        //print out the number - it is prime
+		reslt.push('<span>' + i + '</span><br/>');
+		}
+   // end if
+   }
+			  $('#results').html(reslt.join(" "));
+				event.preventDefault();
+    }); 
+		});   
+</script>
+</head>
+<body>
+
+<h2>Jeyanthi Meenakshisundaram - IT2321 - Lab 12</h2>
+<br />
+<h3>GCD Calculation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+Enter first number: <input type="text" id="num1" name="num1">&nbsp;&nbsp;
+Enter second number: <input type="text" id="num2" name="num2">&nbsp;&nbsp;&nbsp;
+<br /><br /><button type="button" id="GCD" name="GCD">Calculate</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<h3>Prime number Calculation</h3><br />
+Enter Any Number: <input type="text" id="anynum" name="anynum">&nbsp;&nbsp;&nbsp;
+<button type="button" id="prime" name="prime">Calculate</button><br /><br />
+
+<strong>Output</strong><br/>
+<span id="results" name="results"> *** </span>
+<br /><br /><br />
+
+<br /><br />
+
+
+</body>
+</html>
+
+
+
